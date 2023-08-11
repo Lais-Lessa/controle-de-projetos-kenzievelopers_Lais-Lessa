@@ -15,7 +15,7 @@ export const createDeveloperQuery = async (
     email
   );
 
-  const queryResult: DevelopersResults = await client.query(queryFormat);
+ const queryResult: DevelopersResults = await client.query(queryFormat);
 
   if (typeof name !== "string" || typeof email !== "string") {
     throw new AppError("Invalid values typeof.", 400);
@@ -59,6 +59,7 @@ export const checkIdQuery = async (id: number): Promise<QueryResult> => {
   }
   return queryResult.rows[0];
 };
+
 export const modifyDeveloper = async (
   id: number,
   name: string,
@@ -95,12 +96,12 @@ export const insertDeveloperInfoQuery = async (
 ): Promise<QueryResult> => {
   const query = format(
     'INSERT INTO "developerInfos" ("developerSince", "preferredOS", "developerId") VALUES (%L, %L, %L) RETURNING *;',
-    developerSince, //inseri dentro a devolopersInfo  os valores
+    developerSince, 
     preferredOS,
     developerId
   );
-  const result = await client.query(query); //query
-  return result.rows[0]; //retorna os valores
+  const result = await client.query(query); 
+  return result.rows[0]; 
 };
 
 export const checkPreferredOSValidity = async (
